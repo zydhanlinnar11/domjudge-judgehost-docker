@@ -31,11 +31,10 @@ RUN apt-get install --no-install-recommends --no-install-suggests -y \
 RUN rm -rf /var/lib/apt/lists/*
 
 # Add chroot and judgehost data
-COPY ["chroot.tar.gz", "/"]
-COPY ["judgehost.tar.gz", "/"]
-RUN tar -xzvpf /chroot.tar.gz
-RUN tar -xzvpf /judgehost.tar.gz
+ADD chroot.tar.gz /
+ADD judgehost.tar.gz /
 RUN cp /opt/domjudge/judgehost/etc/sudoers-domjudge /etc/sudoers.d/
+
 # Add scripts
 COPY ["judgehost/scripts", "/scripts/"]
 
