@@ -24,10 +24,17 @@ RUN apt-get install --no-install-recommends --no-install-suggests -y \
 RUN apt-get install --no-install-recommends --no-install-suggests -y \
 	gcc g++ 
 RUN apt-get install --no-install-recommends --no-install-suggests -y \
-	default-jre-headless default-jdk 
-	# ghc fp-compiler \
+	default-jre-headless default-jdk
 RUN apt-get install --no-install-recommends --no-install-suggests -y \
 	pypy3
+# Install kotlinc
+RUN apt-get install -y wget zip unzip
+RUN wget https://github.com/JetBrains/kotlin/releases/download/v1.5.30/kotlin-compiler-1.5.30.zip
+RUN unzip kotlin-compiler-1.5.30.zip
+RUN mv /kotlinc /usr/lib
+RUN ln -s ../lib/kotlinc/bin/kotlinc /usr/bin/kotlinc
+RUN ln -s ../lib/kotlinc/bin/kotlin /usr/bin/kotlin
+RUN rm /kotlin-compiler-1.5.30.zip
 RUN rm -rf /var/lib/apt/lists/*
 
 # Add chroot and judgehost data
