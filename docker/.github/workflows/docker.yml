@@ -1,0 +1,21 @@
+name: Build Docker Images
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * 1'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build images
+        run: bash build.sh 7.3.3
+      - name: Push images to Docker
+        if: (github.event_name == 'push' || github.event_name == 'schedule') && github.ref == 'refs/heads/dmoj-docker'
+        run: |
+          echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+          docker push zydhanlinnar11/domjudge-judgehost:7.3.3
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
