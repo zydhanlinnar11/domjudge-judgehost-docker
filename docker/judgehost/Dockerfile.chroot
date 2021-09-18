@@ -1,8 +1,12 @@
-FROM ubuntu:20.04
+FROM debian:stable-slim
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get -y install \
-  ca-certificates default-jre-headless pypy3 locales \
-  && rm -rf /var/lib/apt/lists/*
+RUN apt-get update
+RUN apt-get -y --no-install-recommends --no-install-suggests install ca-certificates
+RUN apt-get -y --no-install-recommends --no-install-suggests install default-jre-headless
+RUN apt-get -y --no-install-recommends --no-install-suggests install default-jdk
+RUN apt-get -y --no-install-recommends --no-install-suggests install pypy3
+RUN apt-get -y --no-install-recommends --no-install-suggests install locales
+RUN rm -rf /var/lib/apt/lists/*
 
 RUN chmod a-s \
   /usr/bin/wall \

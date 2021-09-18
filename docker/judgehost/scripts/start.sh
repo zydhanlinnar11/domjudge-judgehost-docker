@@ -15,6 +15,9 @@ echo ${CONTAINER_TIMEZONE} > /etc/timezone
 dpkg-reconfigure -f noninteractive tzdata
 echo "[ok] Container timezone set to: ${CONTAINER_TIMEZONE}"; echo
 
+sudo ls /chroot
+sudo ls /chroot/domjudge
+sudo ls /chroot/domjudge/etc
 cd /opt/domjudge/judgehost
 
 JUDGEDAEMON_PASSWORD=$(file_or_env JUDGEDAEMON_PASSWORD)
@@ -33,7 +36,7 @@ bin/create_cgroups
 echo "[ok] cgroups set up"; echo
 
 echo "[..] Copying resolv.conf to chroot"
-cp /etc/resolv.conf /chroot/domjudge/etc/resolv.conf
+# cp /etc/resolv.conf /chroot/domjudge/etc/resolv.conf
 echo "[ok] resolv.conf copied"; echo
 
 if ! id domjudge-run-${DAEMON_ID} > /dev/null 2>&1; then

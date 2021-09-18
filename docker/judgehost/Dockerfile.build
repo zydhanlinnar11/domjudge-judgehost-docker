@@ -4,8 +4,8 @@ MAINTAINER DOMjudge team <team@domjudge.org>
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install required packages for build of judgehost
-RUN apt-get update \
-	&& apt-get install --no-install-recommends --no-install-suggests -y \
+RUN apt-get update
+RUN apt-get install --no-install-recommends --no-install-suggests -y \
 	autoconf automake git \
 	gcc g++ make zip unzip \
 	php-cli php-zip lsb-release debootstrap \
@@ -14,7 +14,6 @@ RUN apt-get update \
 	sudo bsdmainutils ntp libcgroup-dev procps \
 	libcurl4-gnutls-dev libjsoncpp-dev libmagic-dev \
 	&& rm -rf /var/lib/apt/lists/*
-
 # Set up user
 RUN useradd -m domjudge
 
