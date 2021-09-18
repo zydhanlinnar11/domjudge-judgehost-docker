@@ -39,7 +39,7 @@ docker cp domjudge-judgehost-${VERSION}-build:/chroot.tar.gz .
 docker cp domjudge-judgehost-${VERSION}-build:/judgehost.tar.gz .
 docker rm -f domjudge-judgehost-${VERSION}-build
 docker rmi domjudge/judgehost:${VERSION}-build
-docker build -t domjudge/judgehost:${VERSION} -f judgehost/Dockerfile .
+docker build -t zydhanlinnar11/domjudge-judgehost:${VERSION} -f judgehost/Dockerfile .
 echo "[ok] Done building Docker image for judgehost"
 
 # echo "[..] Building Docker image for judgehost chroot..."
